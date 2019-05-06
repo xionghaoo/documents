@@ -10,7 +10,6 @@
 + 原生 + ReactNative， 仅ReactNative部分支持热更新
 
 ### 第三方sdk支持
-> app上常用的功能：地图、推送
 
 #### 1. 地图
 > ReactNative的百度、高德地图库都是对原生sdk的封装
@@ -39,8 +38,10 @@
 #### 3. 语音
 **讯飞语音(iflytek)**: 非官方库 [react-native-speech-iflytek](https://github.com/zphhhhh/react-native-speech-iflytek "讯飞语音")
 
+#### 4. 支付
+
+
 ### 硬件支持
-> 蓝牙
 
 #### 1. 低功耗蓝牙(BLE)
 > 蓝牙4.0开始支持BLE，低功耗蓝牙传输距离远，功耗低，但传输数据量小
@@ -55,12 +56,20 @@
 
 传统蓝牙暂时未找到React Native的第三方库
 
+#### 2. 二维码
+[react-native-qrcode-scanner](https://github.com/moaazsidat/react-native-qrcode-scanner)
+
 ### UI
+#### 1. 页面导航
+[React Navigation](https://reactnavigation.org/docs/en/getting-started.html)
 
-
+[React Native Navigation](https://github.com/wix/react-native-navigation)
 
 ### 调试
+#### 真机调试
+> 注意手机端不能开VPN，PC端如果有抓包软件也必须关闭，实在连不上时卸载App重新安装
 
+手机端ReactNative应用内的JS Client 连接 PC端的nodejs server(10.0.1.1:8081)
 
 
 ## Flutter
@@ -74,7 +83,25 @@
 
 ## 其他
 
-ReactNative音视频相关的第三方库也相对较少
+### ReactNative和原生交互
+> ReactNative提供Native Module和Native UI Components来访问原生功能，需要对ios和android分别进行原生开发
+
++ **对Android来说**：
+
+NativeModule继承ReactContextBaseJavaModule，只提供上下文环境，没有生命周期方法，
+消息传递是单向的，只能js 流向 native，native不能主动调用js的方法
+
+JS原生交互可传递的数据类型
+```javascript
+Boolean -> Bool
+Integer -> Number
+Double -> Number
+Float -> Number
+String -> String
+Callback -> function
+ReadableMap -> Object
+ReadableArray -> Array
+```
 
 ## 总结
 
@@ -82,7 +109,18 @@ ReactNative 地图sdk都是非官方支持（对官方的sdk进行了封装）�
 
 ReactNative 蓝牙目前仅支持BLE
 
-如果没有跨平台需求，建议用原生 或者 原生+ReactNative
+## 问题
+
+1. [React Native Gesture Handler](https://github.com/kmagiera/react-native-gesture-handler "")和
+[React Native Camera](https://github.com/react-native-community/react-native-camera "")
+包冲突，导致
+[React Navigation](https://reactnavigation.org/)和
+[ReactNativeQRCodeScanner](https://github.com/moaazsidat/react-native-qrcode-scanner)无法并存
+
+2. 第三方库长时间未更新，版本落后
+
+
+
 
 
 
