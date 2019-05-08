@@ -111,7 +111,7 @@ $ react-native bundle --platform android --dev false --entry-file index.js --bun
 
 app内的js client连接到chrome（http://localhost:8081/debugger-ui），打开开发者工具就可以看到console的log
 
-## 其他
+## 问题
 
 ### JavaScript是如何调用Java代码的？
 
@@ -119,6 +119,12 @@ app内的js client连接到chrome（http://localhost:8081/debugger-ui），打�
 
 [React Native Performance Case Study, How It Differs From Native Apps: Part 1 (MessageQueue & JS Thread)](https://medium.com/@rotemmiz/react-native-internals-a-wider-picture-part-1-messagequeue-js-thread-7894a7cba868)
 
+### JS部分导入npm包以后，AndroidStudio中提示模块无法识别
+
+可能是缓存的问题，在RN根目录下执行下面的命令
+```
+$ rm -rf ./node_modules && npm install
+```
 
 
 

@@ -36,10 +36,16 @@
 **极光推送(JPush)**：官方提供支持库 [极光推送ReactNative SDK](https://github.com/jpush/jpush-react-native "极光推送ReactNative SDK")
 
 #### 3. 语音
-**讯飞语音(iflytek)**: 非官方库 [react-native-speech-iflytek](https://github.com/zphhhhh/react-native-speech-iflytek "讯飞语音")
+**讯飞语音(iflytek)**:
+
+ 非官方库 [react-native-speech-iflytek](https://github.com/zphhhhh/react-native-speech-iflytek "讯飞语音")，
+有bug，发音不准
 
 #### 4. 支付
+NativeModule
 
+#### 5. 分享
+NativeModule
 
 ### 硬件支持
 
@@ -80,16 +86,10 @@
 #### 3. 语音
 **科大讯飞(iflytek)**：未找到第三方库
 
-
 ## 其他
 
 ### ReactNative和原生交互
 > ReactNative提供Native Module和Native UI Components来访问原生功能，需要对ios和android分别进行原生开发
-
-+ **对Android来说**：
-
-NativeModule继承ReactContextBaseJavaModule，只提供上下文环境，没有生命周期方法，
-消息传递是单向的，只能js 流向 native，native不能主动调用js的方法
 
 JS原生交互可传递的数据类型
 ```javascript
@@ -103,12 +103,6 @@ ReadableMap -> Object
 ReadableArray -> Array
 ```
 
-## 总结
-
-ReactNative 地图sdk都是非官方支持（对官方的sdk进行了封装），文档较少，支持特性较少
-
-ReactNative 蓝牙目前仅支持BLE
-
 ## 问题
 
 1. [React Native Gesture Handler](https://github.com/kmagiera/react-native-gesture-handler "")和
@@ -118,6 +112,35 @@ ReactNative 蓝牙目前仅支持BLE
 [ReactNativeQRCodeScanner](https://github.com/moaazsidat/react-native-qrcode-scanner)无法并存
 
 2. 第三方库长时间未更新，版本落后
+
+## 总结
+
+ReactNative 地图sdk都是非官方支持（对官方的sdk进行了封装），文档较少，支持特性较少
+
+ReactNative 蓝牙目前仅支持BLE
+
+目前第三方库的成熟度太低，特殊需求需要Native Module做两端开发
+
+项目如果多为js层面的开发，问题不会太多，最多只是性能问题。
+
++ 目前各大厂商SDK(地图、推送、分享、语音、支付)的支持性，只有极光推送提供官方的RN库。高德地图和百度地图有非官方库，分享、语音、支付都需要自行封装
+
++ 硬件支持，蓝牙和二维码扫描。蓝牙只有BLE的库，传统蓝牙需要自行封装。
+
++ 自行封装库。RN的原生交互部分，将原生的功能实现通过RN提供的桥梁暴露给JS，这里需要写JS和原生两部分代码(核心在原生部分)，原生部分的封装有局限性，可能部分功能无法实现。
+
++ RN的打包后的apk会比原生包的apk体积大8M左右
+
+
+
++ 目前存在的问题
+	1. 高德地图和百度地图的非官方库不支持路径规划
+	2. RN非官方库(涉及原生功能)不经常维护，版本落后，会出现版本兼容问题
+	3. 真机调试容易出现本地服务500的情况，比较难排查的原因可能是npm缓存引起的，这里会影响开发效率。
+	4. 二维码扫描库和ReactNavigation库似乎冲突，二者导入一个项目会报错，暂未解决。
+
+综合考虑，如果有跨平台的需求，RN开发会提高开发效率。如果只做一端，用RN会降低效率。
+
 
 
 
